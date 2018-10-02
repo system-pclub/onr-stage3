@@ -5,3 +5,5 @@ cmake-build-debug/*
 temp-test/*
 
 stubs/example/*
+
+scripts/build/*
