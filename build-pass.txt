@@ -1,0 +1,5 @@
+a. cd ${PATH_TO_CURRENT_PROJECT}
+b. mkdir build
+c. cd build
+d. cmake ..
+e. make
