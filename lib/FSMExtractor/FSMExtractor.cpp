@@ -13,7 +13,7 @@
 using namespace std;
 
 
-static RegisterPass <FSMExtractor> X(
+static RegisterPass<FSMExtractor> X(
         "fsm-extract",
         "extract FSM", true, true);
 
@@ -36,20 +36,18 @@ FSMExtractor::FSMExtractor() : ModulePass(ID) {
 }
 
 
-bool FSMExtractor::isFSMLoop(Loop * pLoop)
-{
-    
+bool FSMExtractor::isFSMLoop(Loop *pLoop) {
+
 }
 
-bool FSMExtractor::runOnModule(Module & M)
-{
+bool FSMExtractor::runOnModule(Module &M) {
 
     if (strFunctionName.empty()) {
-       strFunctionName = "main";
+        strFunctionName = "main";
     }
 
     // get main function and dump it
-    Function * pFunc = M.getFunction(strFunctionName);
+    Function *pFunc = M.getFunction(strFunctionName);
     assert(pFunc != NULL);
 
     // find the loop in this function
