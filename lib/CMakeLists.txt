@@ -1,1 +1,2 @@
-add_subdirectory(DemoPass)
+add_subdirectory(FSMExtractor)
+add_subdirectory(CFG)

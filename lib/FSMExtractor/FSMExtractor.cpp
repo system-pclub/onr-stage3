@@ -8,34 +8,40 @@
 #include "llvm/Support/raw_ostream.h"
 
 
-#include "DemoPass/DemoPass.h"
+#include "FSMExtractor/FSMExtractor.h"
 
 using namespace std;
 
 
-static RegisterPass <DemoPass> X(
-        "dump-function",
-        "print function all instructions", true, true);
+static RegisterPass <FSMExtractor> X(
+        "fsm-extract",
+        "extract FSM", true, true);
 
 static cl::opt<std::string> strFunctionName(
         "strFunctionName",
         cl::desc("The name of function to print"),
         cl::value_desc("strFunctionName"));
 
-char DemoPass::ID = 0;
+char FSMExtractor::ID = 0;
 
 
-void DemoPass::getAnalysisUsage(AnalysisUsage &AU) const {
+void FSMExtractor::getAnalysisUsage(AnalysisUsage &AU) const {
     AU.setPreservesAll();
     AU.addRequired<LoopInfoWrapperPass>();
 }
 
-DemoPass::DemoPass() : ModulePass(ID) {
+FSMExtractor::FSMExtractor() : ModulePass(ID) {
     PassRegistry &Registry = *PassRegistry::getPassRegistry();
     initializeLoopInfoWrapperPassPass(Registry);
 }
 
-bool DemoPass::runOnModule(Module & M)
+
+bool FSMExtractor::isFSMLoop(Loop * pLoop)
+{
+    
+}
+
+bool FSMExtractor::runOnModule(Module & M)
 {
 
     if (strFunctionName.empty()) {

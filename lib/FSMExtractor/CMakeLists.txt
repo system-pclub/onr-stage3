@@ -1,13 +1,15 @@
-add_library(DemoPass MODULE
+add_library(FSMExtractor MODULE
         # List your source files here.
-        DemoPass.cpp
+        FSMExtractor.cpp
         )
 
+target_link_libraries(FSMExtractor CFG)
+
 # Use C++11 to compile our pass (i.e., supply -std=c++11).
-target_compile_features(DemoPass PRIVATE cxx_range_for cxx_auto_type)
+target_compile_features(FSMExtractor PRIVATE cxx_range_for cxx_auto_type)
 
 # LLVM is (typically) built with no C++ RTTI. We need to match that;
 # otherwise, we'll get linker errors about missing RTTI data.
-set_target_properties(DemoPass PROPERTIES
+set_target_properties(FSMExtractor PROPERTIES
         COMPILE_FLAGS "-fno-rtti"
         )
