@@ -1,0 +1,128 @@
+// https://ecomfe.github.io/echarts-examples/public/editor.html?c=graph-simple
+option = {
+    title: {
+        text: 'State Machine Example in tls_process(ssl.c)'
+    },
+    tooltip: {},
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+    series : [
+        {
+            type: 'graph',
+            layout: 'none',
+            symbolSize: 70,
+            roam: true,
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [4, 10],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 50
+                    }
+                }
+            },
+            data: [
+            {
+                name: 'state1',
+                x: 200,
+                y: 100
+            },
+
+            {
+                name: 'state2',
+                x: 800,
+                y: 100
+            },
+
+            {
+                name: 'state3',
+                x: 800,
+                y: 300
+            },
+
+            {
+                name: 'state4',
+                x: 550,
+                y: 200
+            },
+            {
+                name: 'state5',
+                x: 550,
+                y: 350
+            }
+            ,
+            {
+                name: 'state6',
+                x: 400,
+                y: 300
+            }
+
+            ,
+            {
+                name: 'state7',
+                x: 200,
+                y: 300
+            }
+
+
+            ],
+            // links: [],
+            links: [{
+                source: 'state1',
+                target: 'state2',
+
+            }, {
+                source: 'state2',
+                target: 'state3'
+            }, {
+                source: 'state3',
+                target: 'state4'
+            }, {
+                source: 'state3',
+                target: 'state5'
+            }, {
+                source: 'state4',
+                target: 'state5',
+                lineStyle: {
+                normal: {
+                    curveness: 0.2
+                }
+            }
+
+            }, {
+                source: 'state5',
+                target: 'state4',
+                lineStyle: {
+                normal: {
+                    curveness: 0.2
+                }
+            }
+            }, {
+                source: 'state4',
+                target: 'state6'
+            }, {
+                source: 'state5',
+                target: 'state6'
+            }, {
+                source: 'state6',
+                target: 'state7'
+            }
+
+
+
+            ],
+            lineStyle: {
+                normal: {
+                    opacity: 2,
+                    width: 4,
+                    curveness: 0
+                }
+            }
+        }
+    ]
+};

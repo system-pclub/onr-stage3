@@ -8,6 +8,7 @@
 
 
 using namespace llvm;
+using namespace std;
 
 
 class StructFieldInfo {
@@ -19,6 +20,34 @@ public:
 
     bool operator<(const StructFieldInfo &other) const { return Stype < other.Stype; }
 };
+
+
+class StateBase {
+
+public:
+    StoreInst *storeInst;
+    int value;
+};
+
+
+class ConditionBase {
+
+public:
+    LoadInst *loadInst;
+    int predicate; // ICMP_EQ, ICMP_NE.....
+    string direction; // true or false
+    int value;
+};
+
+
+class PoState {
+
+public:
+    StateBase *stateBase;
+    vector<ConditionBase *> condVec;
+    bool isEqual;
+};
+
 
 struct FSMExtractor : public ModulePass {
     static char ID;
@@ -35,8 +64,10 @@ struct FSMExtractor : public ModulePass {
 
     bool fieldTypeFilter(Type *fieldType);
 
+    bool findAPath(BasicBlock *A, BasicBlock *B, set<BasicBlock *> pLoopBBSet, BasicBlock *pLoopHeader);
+
     /* Va if from LoadInst or StoreInst */
-    StructFieldInfo* getStructFieldInfo(Value *Va);
+    StructFieldInfo *getStructFieldInfo(Value *Va);
 
 };
 
