@@ -1,0 +1,50 @@
+# Query 0 -- Type: Validity, Instructions: 13
+array a[4] : w32 -> w8 = symbolic
+(query [] (Eq 0
+               (ReadLSB w32 0 a)))
+#   OK -- Elapsed: 1.301765e-03
+#   Validity: 0
+
+# Query 1 -- Type: Validity, Instructions: 20
+array a[4] : w32 -> w8 = symbolic
+(query [(Eq false
+             (Eq 0
+                 N0:(ReadLSB w32 0 a)))]
+        (Slt N0 0))
+#   OK -- Elapsed: 8.145332e-03
+#   Validity: 0
+
+# Query 2 -- Type: InitialValues, Instructions: 21
+array a[4] : w32 -> w8 = symbolic
+(query [(Eq 0
+             (ReadLSB w32 0 a))]
+        false []
+        [a])
+#   OK -- Elapsed: 7.319450e-05
+#   Solvable: true
+#     a = [0,0,0,0]
+
+# Query 3 -- Type: InitialValues, Instructions: 26
+array a[4] : w32 -> w8 = symbolic
+(query [(Eq false
+             (Eq 0
+                 N0:(ReadLSB w32 0 a)))
+         (Eq false (Slt N0 0))]
+        false []
+        [a])
+#   OK -- Elapsed: 1.244545e-04
+#   Solvable: true
+#     a = [1,1,1,1]
+
+# Query 4 -- Type: InitialValues, Instructions: 31
+array a[4] : w32 -> w8 = symbolic
+(query [(Eq false
+             (Eq 0
+                 N0:(ReadLSB w32 0 a)))
+         (Slt N0 0)]
+        false []
+        [a])
+#   OK -- Elapsed: 7.581711e-05
+#   Solvable: true
+#     a = [0,0,0,128]
+
