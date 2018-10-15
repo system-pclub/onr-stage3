@@ -58,11 +58,11 @@ std::string printSrcCodeInfo(Instruction *pInst) {
 }
 
 
-std::string icmpString(int cmp_token) {
+std::string icmpString(int cmp_token, bool br) {
 
     switch (cmp_token) {
         case ICmpInst::ICMP_EQ: {
-            return "EQUAL";
+            return "==";
         }
 
         case ICmpInst::ICMP_NE: {
@@ -94,11 +94,14 @@ std::string icmpString(int cmp_token) {
         }
 
         case ICmpInst::ICMP_SLT: {
-            return "SMALLER THAN";
+            if (br)
+                return "<";
+            else
+                return ">=";
         }
 
         case ICmpInst::ICMP_SLE: {
-            return "ICMP_SLE";
+            return ">=";
         }
 
         default:
@@ -112,19 +115,19 @@ void printPoState(vector<PoState *> poStateVec) {
 
     // filter not equal
 
-    for (auto it=poStateVec.begin(); it != poStateVec.end(); ++it) {
-
-        PoState *curState = *it;
-
-        for (auto ho = curState->condVec.begin(); ho != curState->condVec.end(); ++ho) {
-            ConditionBase *conBase = *ho;
-
-            if (conBase->predicate == ICmpInst::ICMP_EQ) {
-                curState->isEqual = true;
-            }
-        }
-
-    }
+//    for (auto it=poStateVec.begin(); it != poStateVec.end(); ++it) {
+//
+//        PoState *curState = *it;
+//
+//        for (auto ho = curState->condVec.begin(); ho != curState->condVec.end(); ++ho) {
+//            ConditionBase *conBase = *ho;
+//
+//            if (conBase->predicate == ICmpInst::ICMP_EQ) {
+//                curState->isEqual = true;
+//            }
+//        }
+//
+//    }
 
     for (auto it=poStateVec.begin(); it != poStateVec.end(); ++it) {
 
@@ -149,10 +152,10 @@ void printPoState(vector<PoState *> poStateVec) {
             }
 
             if (conBase->direction == "Not")
-                errs() << conBase->direction + " " + icmpString(conBase->predicate) <<
+                errs() << icmpString(conBase->predicate, false) <<
                        " " << to_string(conBase->value) << "\n";
             else
-                errs() << icmpString(conBase->predicate) <<
+                errs() << icmpString(conBase->predicate, true) <<
                        " " << to_string(conBase->value) << "\n";
         }
         errs() << "========================================= \n";
@@ -409,9 +412,9 @@ void FSMExtractor::collectStoreAndStore(Loop *pLoop) {
                             conBase->value = conInst->getSExtValue();
 
                             // TODO:: FIX ME
-                            if(conBase->value == stateBase->value) {
-                                continue;
-                            }
+//                            if(conBase->value == stateBase->value) {
+//                                continue;
+//                            }
 
                             TerminatorInst *termInst = loadInst->getParent()->getTerminator();
                             if (BranchInst *branInst = dyn_cast<BranchInst>(termInst)) {

@@ -1,7 +1,7 @@
 // https://ecomfe.github.io/echarts-examples/public/editor.html?c=graph-simple
 option = {
     title: {
-        text: 'State Machine Example in tls_process(ssl.c)'
+        text: ' Final State Machine'
     },
     tooltip: {},
     animationDurationUpdate: 1500,
@@ -18,7 +18,7 @@ option = {
                 }
             },
             edgeSymbol: ['circle', 'arrow'],
-            edgeSymbolSize: [4, 10],
+            edgeSymbolSize: [4, 20],
             edgeLabel: {
                 normal: {
                     textStyle: {
@@ -28,66 +28,87 @@ option = {
             },
             data: [
             {
-                name: 'state1',
+                name: '1',
                 x: 200,
-                y: 100
+                y: 100,
+                label: {
+                    fontSize: 30,
+                }
             },
 
             {
-                name: 'state2',
+                name: '2',
                 x: 800,
-                y: 100
+                y: 100,
+                label: {
+                    fontSize: 30,
+                }
             },
 
             {
-                name: 'state3',
+                name: '3',
                 x: 800,
-                y: 300
+                y: 300,
+                label: {
+                    fontSize: 30,
+                }
             },
 
             {
-                name: 'state4',
+                name: '4',
                 x: 550,
-                y: 200
+                y: 200,
+                label: {
+                    fontSize: 30,
+                }
             },
             {
-                name: 'state5',
+                name: '5',
                 x: 550,
-                y: 350
+                y: 350,
+                label: {
+                    fontSize: 30,
+                }
             }
             ,
             {
-                name: 'state6',
+                name: '6',
                 x: 400,
-                y: 300
+                y: 300,
+                label: {
+                    fontSize: 30,
+                }
             }
 
             ,
             {
-                name: 'state7',
+                name: '7',
                 x: 200,
-                y: 300
+                y: 300,
+                label: {
+                    fontSize: 30,
+                }
             }
 
 
             ],
             // links: [],
             links: [{
-                source: 'state1',
-                target: 'state2',
+                source: '1',
+                target: '2',
 
             }, {
-                source: 'state2',
-                target: 'state3'
+                source: '2',
+                target: '3'
             }, {
-                source: 'state3',
-                target: 'state4'
+                source: '3',
+                target: '4'
             }, {
-                source: 'state3',
-                target: 'state5'
+                source: '3',
+                target: '5'
             }, {
-                source: 'state4',
-                target: 'state5',
+                source: '4',
+                target: '5',
                 lineStyle: {
                 normal: {
                     curveness: 0.2
@@ -95,25 +116,33 @@ option = {
             }
 
             }, {
-                source: 'state5',
-                target: 'state4',
+                source: '5',
+                target: '4',
                 lineStyle: {
                 normal: {
                     curveness: 0.2
                 }
             }
-            }, {
-                source: 'state4',
-                target: 'state6'
-            }, {
-                source: 'state5',
-                target: 'state6'
-            }, {
-                source: 'state6',
-                target: 'state7'
+            },
+            {
+                source: '5',
+                target: '5',
+                lineStyle: {
+                normal: {
+                    curveness: 2
+                }
             }
-
-
+            }
+            , {
+                source: '4',
+                target: '6'
+            }, {
+                source: '5',
+                target: '6'
+            }, {
+                source: '6',
+                target: '7'
+            }
 
             ],
             lineStyle: {
