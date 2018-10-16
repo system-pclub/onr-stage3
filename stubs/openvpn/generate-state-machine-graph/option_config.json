@@ -1,0 +1,37 @@
+{
+  "title": {
+    "text": "Final State Machine"
+  },
+  "tooltip": {},
+  "animationDurationUpdate": 1500,
+  "animationEasingUpdate": "quinticInOut",
+  "series": [
+    {
+      "type": "graph",
+      "layout": "none",
+      "symbolSize": 70,
+      "roam": true,
+      "label": {
+        "normal": {
+          "show": true
+        }
+      },
+      "edgeSymbol": ["circle", "arrow"],
+      "edgeSymbolSize": [4, 20],
+      "edgeLabel": {
+        "normal": {
+          "textStyle": {
+            "fontSize": 50
+          }
+        }
+      },
+      "lineStyle": {
+        "normal": {
+          "opacity": 2,
+          "width": 4,
+          "curveness": 0
+        }
+      }
+    }
+  ]
+}

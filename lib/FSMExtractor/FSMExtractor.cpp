@@ -28,7 +28,14 @@ static cl::opt<std::string> strFunctionName(
         cl::desc("The name of function to print"),
         cl::value_desc("strFunctionName"));
 
+static cl::opt<std::string> strOutFilePath(
+        "strOutFilePath",
+        cl::desc("The Path of output file"),
+        cl::value_desc("strOutFilePath"));
+
+
 char FSMExtractor::ID = 0;
+
 
 bool FSMExtractor::fieldTypeFilter(Type *fieldType) {
 
@@ -109,9 +116,9 @@ std::string icmpString(int cmp_token, bool br) {
     }
 }
 
-void printPoState(vector<PoState *> poStateVec) {
+void FSMExtractor::printPoState(vector<PoState *> poStateVec) {
 
-    errs() << "========================================= \n";
+     outPutFile << "========================================= \n";
 
     // filter not equal
 
@@ -132,7 +139,7 @@ void printPoState(vector<PoState *> poStateVec) {
     for (auto it=poStateVec.begin(); it != poStateVec.end(); ++it) {
 
         PoState *curState = *it;
-        errs() << "Store State Value: " << curState->stateBase->value << "\n";
+        outPutFile << "Store State Value: " << curState->stateBase->value << "\n";
 
         set<int> printValues;
 
@@ -152,13 +159,13 @@ void printPoState(vector<PoState *> poStateVec) {
             }
 
             if (conBase->direction == "Not")
-                errs() << icmpString(conBase->predicate, false) <<
+                outPutFile << icmpString(conBase->predicate, false) <<
                        " " << to_string(conBase->value) << "\n";
             else
-                errs() << icmpString(conBase->predicate, true) <<
+                outPutFile << icmpString(conBase->predicate, true) <<
                        " " << to_string(conBase->value) << "\n";
         }
-        errs() << "========================================= \n";
+        outPutFile << "========================================= \n";
     }
 
 }
@@ -472,6 +479,14 @@ bool FSMExtractor::runOnModule(Module &M) {
     if (strFunctionName.empty()) {
         strFunctionName = "main";
     }
+
+    if (strOutFilePath.empty()) {
+        errs() << "Please set output file path!" << "\n";
+        exit(1);
+    }
+
+    string strFileName = strOutFilePath + "states.txt";
+    outPutFile.open(strFileName, std::ofstream::out);
 
     // get main function and dump it
     Function *pFunc = M.getFunction(strFunctionName);

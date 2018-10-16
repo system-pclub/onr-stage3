@@ -1,6 +1,8 @@
 #ifndef ONR_STAGE3_FSMEXTRACTOR_H
 #define ONR_STAGE3_FSMEXTRACTOR_H
 
+#include <fstream>
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/DerivedTypes.h"
@@ -66,8 +68,12 @@ struct FSMExtractor : public ModulePass {
 
     bool findAPath(BasicBlock *A, BasicBlock *B, set<BasicBlock *> pLoopBBSet, BasicBlock *pLoopHeader);
 
+    void printPoState(vector<PoState *> poStateVec);
+
     /* Va if from LoadInst or StoreInst */
     StructFieldInfo *getStructFieldInfo(Value *Va);
+
+    ofstream outPutFile;
 
 };
 
