@@ -12,7 +12,9 @@ The code repository for onr supported projects
 
 - Enter scripts folder and run [build-pass.sh](./scripts/build-pass.sh)
 
-- Enter stubs/demo folder and run [test-demo.sh](./stubs/demo/test-demo.sh)
+- Enter stubs/demo folder and run [test-openvpn.sh](./stubs/openvpn/test-openvpn.sh)
+
+- In your terminal, type python generate_state_machines.py
 
 ### 3. Contribute Your Code
 
